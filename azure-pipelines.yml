@@ -11,10 +11,19 @@ pool:
 
 steps:
 - task: Docker@2
-  displayName: 'Docker'
+  displayName: 'Docker build and push to registry'
   inputs:
     containerRegistry: 'Mike Wild Container Registry'
     repository: docker-test
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     buildContext: '$(System.DefaultWorkingDirectory)'
+
+- task: AzureCLI@2
+  displayName: 'Docker run'
+  inputs:
+    azureSubscription: 'ARM Subscription'
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: 
+      'az container create --resource-group docker -name docker-test --location uksouth --image mikewilddocker.azurecr.io/docker-test:$(Build.BuildId) --dns-name-label mikewilddocker-dns --ports 80 --registry-username $(username) --registry-password $(password)'
