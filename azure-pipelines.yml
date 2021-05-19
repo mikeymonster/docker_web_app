@@ -29,4 +29,7 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: 
-      'az container create --resource-group docker --name docker-test --location uksouth --image mikewilddocker.azurecr.io/docker-test:$(Build.BuildId) --dns-name-label mikewilddocker-dns --ports 80 --registry-username $(username) --registry-password $(password)'
+      'az container create --resource-group docker --name docker-test --location uksouth --image mikewilddocker.azurecr.io/docker-test:$(Build.BuildId) --dns-name-label mikewilddocker-dns --ports 80'
+
+# what user/password to use?  --registry-username $(username) --registry-password $(password)
+#https://stackoverflow.com/questions/57234110/how-can-a-script-access-service-connections-azure-devops-pipelines
