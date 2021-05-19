@@ -17,4 +17,4 @@ steps:
     repository: docker-test
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
-    buildContext: '$(System.DefaultWorkingDirectory)/WebApplication3'
+    buildContext: '$(System.DefaultWorkingDirectory)'
